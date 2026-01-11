@@ -12,7 +12,7 @@ public class Longest_substring_without_repeat_3 {
     for (int right = 0; right < s.length(); right++) {
       char curr = s.charAt(right);
       if (hs.containsKey(curr) && hs.get(curr) >= left) {
-        left = hs.get(curr) + 1;
+        left = hs.get(curr) + 1; // left = 2 , 
       }
       hs.put(curr, right);
       maxLen = Math.max(maxLen, right - left + 1);
