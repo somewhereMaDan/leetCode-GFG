@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -66,25 +67,39 @@ public class BST_Traversal {
     System.out.print(root.val + " ");
   }
 
-  void InOrder(ListNode root) {
+  void InOrder(ListNode root, ArrayList<Integer> arr) {
+    // LDR
     if (root == null) {
       return;
     }
-    InOrder(root.left);
-    System.out.println(root.val + " ");
-    InOrder(root.right);
+    InOrder(root.left, arr);
+    System.out.print(root.val + " ");
+    arr.add(root.val);
+    InOrder(root.right, arr);
+  }
+
+  int kthSmallest(ListNode root, int k, ArrayList<Integer> arr) {
+    InOrder(root, arr);
+    System.out.println("k: "+ k);
+    return arr.get(k+1);
   }
 
   public static void main(String[] args) {
+    ArrayList<Integer> arr = new ArrayList<>();
     BST_Traversal obj = new BST_Traversal();
     ListNode root = null;
-    root = obj.InsertNode(root, 25);
-    root = obj.InsertNode(root, 20);
-    root = obj.InsertNode(root, 22);
-    root = obj.InsertNode(root, 17);
-    root = obj.InsertNode(root, 30);
-    root = obj.InsertNode(root, 37);
-    root = obj.InsertNode(root, 28);
+    // root = obj.InsertNode(root, 25);
+    // root = obj.InsertNode(root, 20);
+    // root = obj.InsertNode(root, 22);
+    // root = obj.InsertNode(root, 17);
+    // root = obj.InsertNode(root, 30);
+    // root = obj.InsertNode(root, 37);
+    // root = obj.InsertNode(root, 28);
+    root = obj.InsertNode(root, 3);
+    root = obj.InsertNode(root, 1);
+    root = obj.InsertNode(root, 4);
+    root = obj.InsertNode(root, 2);
+
 
     System.out.print("Level Order traversal: ");
     obj.LevelOrder(root);
@@ -98,7 +113,9 @@ public class BST_Traversal {
     obj.PostOrder(root);
     System.out.println();
 
-    System.out.print("In-Order traversal: ");
+    System.out.println("answer: " + obj.kthSmallest(root, 1, arr));
 
+    // System.out.print("In-Order traversal: ");
+    // obj.InOrder(root);
   }
 }
